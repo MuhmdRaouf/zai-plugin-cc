@@ -52,22 +52,23 @@ work, and Claude orchestrates, verifies and reviews it.
 
 ## Install
 
-From GitHub, at user scope (available in every project):
+From the `muhmdraouf` marketplace ([MuhmdRaouf/claude-code-plugins](https://github.com/MuhmdRaouf/claude-code-plugins)),
+at user scope (available in every project):
 
 ```
-/plugin marketplace add MuhmdRaouf/zai-plugin-cc
+/plugin marketplace add MuhmdRaouf/claude-code-plugins
 /plugin install zai@muhmdraouf
 ```
 
 User scope is the default. From a terminal the same is
-`claude plugin marketplace add MuhmdRaouf/zai-plugin-cc && claude plugin install zai@muhmdraouf --scope user`
+`claude plugin marketplace add MuhmdRaouf/claude-code-plugins && claude plugin install zai@muhmdraouf --scope user`
 (`--scope project` or `local` enables it for one repository only).
 
-From a local clone (for development):
+From a local clone (for development), load the plugin directly:
 
 ```
-/plugin marketplace add /path/to/zai-plugin-cc
-/plugin install zai@muhmdraouf
+npm ci && npm run build
+claude --plugin-dir ./plugins/zai
 ```
 
 ## Setup

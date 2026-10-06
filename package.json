@@ -18,7 +18,7 @@
     "todos": "node scripts/no-todos.mjs",
     "dist:fresh": "node scripts/build.mjs --check",
     "mutate": "stryker run",
-    "check": "npm run lint && npm run test -- --passWithNoTests"
+    "check": "npm run typecheck && npm run lint && npm run test && npm run todos"
   },
   "dependencies": {
     "picomatch": "4.0.7",

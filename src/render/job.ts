@@ -1,0 +1,26 @@
+import type { BoardRow } from "../app/queries.ts";
+import { attemptSummary } from "../domain/prompt-summary.ts";
+import { age, modelId, oneLine, progressText } from "./format.ts";
+
+const LAST_TEXT_CHARS = 160;
+
+/** `zai show`: state, attempts so far and, while running, what the worker is doing. */
+export function jobView(row: BoardRow, now: number): string {
+  const { job, progress, live } = row;
+  const active = job.state === "running" || job.state === "verifying";
+  const driver = active && !live ? " (stale: no live driver; /zai:stop or /zai:discard it)" : "";
+  return [
+    `zai job ${job.id}: ${job.brief.title}`,
+    `${job.state.replace("_", " ")}${driver} · ${modelId(job)} · ${job.brief.mode} · created ${age(job.createdAt, now)} ago · updated ${age(job.updatedAt, now)} ago`,
+    `workspace ${job.workspace.worktree ?? job.workspace.repoRoot}`,
+    ...(job.attempts.length === 0
+      ? ["Attempts: none yet"]
+      : ["Attempts:", ...job.attempts.map((attempt) => `  ${attemptSummary(attempt)}`)]),
+    ...(progress === undefined
+      ? []
+      : [
+          `Progress: ${progressText(progress)}`,
+          ...(progress.lastText === "" ? [] : [`  "${oneLine(progress.lastText, LAST_TEXT_CHARS)}"`]),
+        ]),
+  ].join("\n");
+}

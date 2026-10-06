@@ -1,0 +1,16 @@
+{
+  "description": "At session start, print a one-line summary when zai jobs await review.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/dist/zai.js\" board --hook",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

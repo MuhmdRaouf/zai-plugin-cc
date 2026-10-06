@@ -1,0 +1,22 @@
+{
+  "name": "muhmdraouf",
+  "owner": {
+    "name": "Raouf"
+  },
+  "metadata": {
+    "description": "Raouf's Claude Code plugins.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "zai",
+      "description": "Delegate bulk mechanical work to GLM (Z.ai); Claude orchestrates, verifies and reviews.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Raouf"
+      },
+      "source": "./plugins/zai",
+      "license": "GPL-3.0-or-later"
+    }
+  ]
+}
